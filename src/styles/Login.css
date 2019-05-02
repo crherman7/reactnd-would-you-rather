@@ -1,0 +1,80 @@
+@import url("https://fonts.googleapis.com/css?family=Karla");
+
+.Login {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.Form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Login__input {
+  outline: none;
+  width: 130px;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-size: 10px auto;
+  background-position: left 5px top 50%;
+  padding-left: 25px;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-top: 5px;
+  font-family: "Karla";
+}
+
+.Login__input:focus {
+  width: 200px;
+  transition: width 100ms linear;
+}
+
+.Login__input--username {
+  background-image: url("../assets/icons/contact.svg");
+}
+
+.Login__input--password {
+  background-image: url("../assets/icons/lock.svg");
+}
+
+.Login__input--name {
+  background-image: url("../assets/icons/name.png");
+}
+
+.Login__input--avatar {
+  background-image: url("../assets/icons/avatar.png");
+}
+
+.Login__button {
+  width: 70px;
+  margin-top: 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+  outline: none;
+  font-family: "Karla";
+}
+
+.Login__button:hover {
+  background-color: black;
+  color: white;
+}
+
+.Login__button--register {
+  margin-left: 5px;
+}
+
+.Login__button--login {
+  margin-right: 5px;
+}
+
+.Login__title {
+  font-family: "Karla";
+  font-size: 26px;
+  font-weight: bolder;
+  margin-bottom: 5px;
+}

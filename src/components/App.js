@@ -1,7 +1,20 @@
-import React from "react";
+import React, { Component } from "react";
+import { handleInitialData } from "../actions/shared";
+import { connect } from "react-redux";
+import Login from "./Login";
 
-function App() {
-  return <div>Would You Rather?</div>;
+class App extends Component {
+  componentDidMount() {
+    this.props.dispatch(handleInitialData());
+  }
+
+  render() {
+    return (
+      <div>
+        <Login />
+      </div>
+    );
+  }
 }
 
-export default App;
+export default connect()(App);
