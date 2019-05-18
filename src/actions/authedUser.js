@@ -1,39 +1,86 @@
-import { authenticate } from "../util/api";
+import { authenticate, register } from "../util/api";
+import { handleInitialData } from "./shared";
 
-export const LOGIN_AUTHED_USER = "LOGIN_AUTHED_USER";
-export const LOGOUT_AUTHED_USER = "LOGOUT_AUTHED_USER";
-export const REGISTER_AUTHED_USER = "REGISTER_AUTHED_USER";
+export const LOGIN_REQUEST = "LOGIN_REQUEST";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
-const loginAuthedUser = user => {
+export const REGISTER_REQUEST = "REGISTER_REQUEST";
+export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
+export const REGISTER_FAILURE = "REGISTER_FAILURE";
+
+const loginRequest = creds => {
   return {
-    type: LOGIN_AUTHED_USER,
-    user
+    type: LOGIN_REQUEST,
+    isFetching: true,
+    isAuthenticated: false,
+    creds
   };
 };
 
-const logoutAuthedUser = id => {
+const loginSuccess = user => {
   return {
-    type: LOGOUT_AUTHED_USER,
-    id
+    type: LOGIN_SUCCESS,
+    isFetching: false,
+    isAuthenticated: true,
+    id: user.id
   };
 };
 
-const registerAuthedUser = registration => {
+const loginError = message => {
   return {
-    type: REGISTER_AUTHED_USER,
-    registration
+    type: LOGIN_FAILURE,
+    isFetching: false,
+    isAuthenticated: false,
+    message
   };
 };
 
-export const handleLoginAuthedUser = (username, password) => {
+const registerRequest = info => {
+  return {
+    type: REGISTER_REQUEST,
+    isFetching: true,
+    isAuthenticated: false,
+    info
+  };
+};
+
+const registerSuccess = user => {
+  return {
+    type: REGISTER_SUCCESS,
+    isFetching: false,
+    isAuthenticated: true,
+    id: user.id
+  };
+};
+
+const registerFailure = message => {
+  return {
+    type: REGISTER_FAILURE,
+    isFetching: false,
+    isAuthenticated: false,
+    message
+  };
+};
+
+export const handleRegisterUser = info => {
   return dispatch => {
-    return authenticate({
-      username,
-      password
+    dispatch(registerRequest(info));
+    return register({
+      info
     })
-      .then(user => dispatch(loginAuthedUser(user)))
-      .catch(e => {
-        alert(e);
-      });
+      .then(user => dispatch(registerSuccess(user)))
+      .catch(e => dispatch(registerFailure(e)));
+  };
+};
+export const handleLoginAuthedUser = creds => {
+  return dispatch => {
+    dispatch(loginRequest(creds));
+    return authenticate({
+      creds
+    })
+      .then(user => dispatch(loginSuccess(user)))
+      .then(() => dispatch(handleInitialData()))
+      .catch(e => dispatch(loginError(e)));
   };
 };

@@ -1,11 +1,11 @@
-@import url("https://fonts.googleapis.com/css?family=Karla");
-
 .Login {
-  height: 100vh;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 30%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
 .Form {
@@ -16,6 +16,7 @@
 }
 
 .Login__input {
+  background: white;
   outline: none;
   width: 130px;
   height: 20px;
@@ -23,15 +24,16 @@
   background-size: 10px auto;
   background-position: left 5px top 50%;
   padding-left: 25px;
-  border: 1px solid black;
   border-radius: 10px;
   margin-top: 5px;
-  font-family: "Karla";
+  border: 1px solid #dfe1e5;
 }
 
 .Login__input:focus {
   width: 200px;
-  transition: width 100ms linear;
+  box-shadow: 0px 0px 5px #e8e8e8;
+  transition: all 100ms linear;
+  transition-property: width, box-shadow;
 }
 
 .Login__input--username {
@@ -53,15 +55,14 @@
 .Login__button {
   width: 70px;
   margin-top: 10px;
-  border: 1px solid black;
   border-radius: 10px;
+  border: 1px solid #dfe1e5;
   outline: none;
-  font-family: "Karla";
+  background: white;
 }
 
 .Login__button:hover {
-  background-color: black;
-  color: white;
+  box-shadow: 0px 0px 5px #e8e8e8;
 }
 
 .Login__button--register {
@@ -73,8 +74,7 @@
 }
 
 .Login__title {
-  font-family: "Karla";
-  font-size: 26px;
+  font-size: 30px;
   font-weight: bolder;
-  margin-bottom: 5px;
+  margin-bottom: 50px;
 }

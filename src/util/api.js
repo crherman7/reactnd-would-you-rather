@@ -3,7 +3,8 @@ import {
   _getUsers,
   _saveQuestion,
   _saveQuestionAnswer,
-  _authenticate
+  _authenticate,
+  _register
 } from "./_DATA";
 
 export const getInitialData = () => {
@@ -19,6 +20,10 @@ export const saveQuestion = () => {};
 
 export const saveQuestionAnswer = () => {};
 
-export const authenticate = (user, password) => {
-  return _authenticate(user, password);
+export const authenticate = creds => {
+  return _authenticate(creds);
+};
+
+export const register = info => {
+  return _register(info);
 };

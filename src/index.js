@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Login from "./components/Login";
+import App from "./components/App";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import reducer from "./reducers";
@@ -11,7 +11,7 @@ const store = createStore(reducer, middleware);
 
 ReactDOM.render(
   <Provider store={store}>
-    <Login />
+    <App />
   </Provider>,
   document.getElementById("root")
 );

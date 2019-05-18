@@ -126,10 +126,31 @@ function generateUID() {
   );
 }
 
-export function _authenticate({ username, password }) {
+export function _register({ info }) {
   return new Promise((res, rej) => {
-    users[username]
-      ? res({ ...users[username] })
+    const { name, username, password, avatar } = info;
+
+    setTimeout(() => {
+      users = {
+        ...users,
+        [username]: {
+          id: username,
+          name: name,
+          avatarURL: avatar,
+          answers: {},
+          questions: []
+        }
+      };
+      console.log(users);
+      res({ ...users[username] });
+    }, 1000);
+  });
+}
+
+export function _authenticate({ creds }) {
+  return new Promise((res, rej) => {
+    users[creds.username]
+      ? res({ ...users[creds.username] })
       : rej("Could not authenticate credentials, please try again.");
   });
 }

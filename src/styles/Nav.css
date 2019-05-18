@@ -1,0 +1,43 @@
+nav {
+  height: 40px;
+  position: fixed;
+  background-color: white;
+  width: 100%;
+  box-shadow: 0px 1px 5px #e8e8e8;
+}
+
+.nav ul {
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: white;
+  height: 100%;
+}
+
+ul {
+  padding-left: 0;
+}
+
+li {
+  list-style-type: none;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.navText {
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+  font-size: 13px;
+}
+
+.navText:hover {
+  color: grey;
+}
+
+.navText--logout {
+  position: fixed;
+  right: 15px;
+}
