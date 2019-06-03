@@ -16,16 +16,16 @@ class App extends Component {
       <Router>
         <Fragment>
           <LoadingBar style={{ zIndex: "999" }} />
-          <Nav />
           {this.props.authenticated === false ? (
             <Login />
           ) : (
-            <div>
+            <Fragment>
+              <Nav />
               <Route path="/" exact component={Questions} />
               <Route path="/questions/:question_id" component={Question} />
               <Route path="/add" component={NewQuestion} />
               <Route path="/leaderboard" component={Leaderboard} />
-            </div>
+            </Fragment>
           )}
           <Footer />
         </Fragment>

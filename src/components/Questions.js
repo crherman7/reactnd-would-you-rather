@@ -10,23 +10,15 @@ class Questions extends Component {
       <div className="Questions-container">
         <div className="Questions--title">Unanswered Questions</div>
         {Object.entries(questions)
-          .filter(([key, value]) => !users[authedUser.id].answers[key])
+          .filter(([key, value]) => !users[authedUser.id].answers[value.id])
           .map(([key, value]) => (
-            <QuestionsItem
-              key={key}
-              question={value}
-              userId={authedUser.id}
-            />
+            <QuestionsItem key={key} question={value} userId={authedUser.id} />
           ))}
         <div className="Questions--title">Answered Questions</div>
         {Object.entries(questions)
-          .filter(([key, value]) => users[authedUser.id].answers[key])
+          .filter(([key, value]) => users[authedUser.id].answers[value.id])
           .map(([key, value]) => (
-            <QuestionsItem
-              key={key}
-              question={value}
-              userId={authedUser.id}
-            />
+            <QuestionsItem key={key} question={value} userId={authedUser.id} />
           ))}
       </div>
     );
@@ -35,7 +27,9 @@ class Questions extends Component {
 
 const mapStateToProps = ({ questions, authedUser, users }) => {
   return {
-    questions,
+    questions: Object.values(questions).sort(
+      (a, b) => b.timestamp - a.timestamp
+    ),
     authedUser,
     users
   };

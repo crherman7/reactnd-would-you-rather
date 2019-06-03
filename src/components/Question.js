@@ -3,16 +3,88 @@ import { connect } from "react-redux";
 import "../styles/Question.css";
 
 class Question extends Component {
+  handleClickChoice = (e, choice) => {
+    e.preventDefault();
+    console.log(choice);
+  };
+
+  totalVotes = () => {
+    const sum =
+      this.props.question.optionOne.votes.length +
+      this.props.question.optionTwo.votes.length;
+    return sum;
+  };
+
+  calculatePercentage = length => {
+    let percentage =
+      (this.totalVotes() === 0 ? 0 : length / this.totalVotes()) * 100;
+
+    return percentage;
+  };
+
   render() {
-    const { question_id, question, user } = this.props;
+    const { question_id, question, user, users } = this.props;
+    const disabled = question && user.answers.hasOwnProperty(question_id);
+    const optionOneStyle =
+      disabled && user.answers[question_id] === "optionOne"
+        ? { backgroundColor: "lightgreen", boxShadow: "0px 0px 5px #e8e8e8" }
+        : { backgroundColor: "white" };
+    const optionTwoStyle =
+      disabled && user.answers[question_id] === "optionTwo"
+        ? { backgroundColor: "lightgreen", boxShadow: "0px 0px 5px #e8e8e8" }
+        : { backgroundColor: "white" };
+    const percentageOne =
+      question && this.calculatePercentage(question.optionOne.votes.length);
+    const percentageTwo =
+      question && this.calculatePercentage(question.optionTwo.votes.length);
 
     return (
       <div>
         {question && (
           <div className="Question-container">
-            <div className="Question__option">{question.optionOne.text}</div>
+            <div className="Question__title-text">would you rather...</div>
+            <button
+              onClick={e => this.handleClickChoice(e, "optionOne")}
+              className="Question__option"
+              style={optionOneStyle}
+              disabled={disabled}
+            >
+              {question.optionOne.text}
+            </button>
+            <div className="Question__statistics">
+              <div className="Question__percentage">{percentageOne}%</div>
+              <div className="Question__votes">
+                {question.optionOne.votes.length} vote(s)
+              </div>
+            </div>
             <div className="Question__divider-text">or</div>
-            <div className="Question__option">{question.optionTwo.text}</div>
+            <button
+              onClick={e => this.handleClickChoice(e, "optionTwo")}
+              className="Question__option"
+              style={optionTwoStyle}
+              disabled={disabled}
+            >
+              {question.optionTwo.text}
+            </button>
+            <div className="Question__statistics">
+              <div className="Question__percentage">{percentageTwo}%</div>
+              <div className="Question__votes">
+                {question.optionTwo.votes.length} vote(s)
+              </div>
+            </div>
+            <div className="Question__author">
+              <div className="Question__author--pre">Posted by: </div>
+              <div className="Question__avatar">
+                <img
+                  className="Question__avatar--pic"
+                  src={users[question.author].avatarURL}
+                  alt=""
+                />
+              </div>
+              <div className="Question__author--name">
+                {users[question.author].name}
+              </div>
+            </div>
           </div>
         )}
       </div>
@@ -26,7 +98,8 @@ const mapStateToProps = ({ questions, authedUser, users }, props) => {
   return {
     question_id,
     question: questions[question_id],
-    user: users[authedUser.id]
+    user: users[authedUser.id],
+    users
   };
 };
 

@@ -4,10 +4,19 @@ import { NavLink } from "react-router-dom";
 import "../styles/Nav.css";
 
 class Nav extends Component {
+  state = {
+    showMenu: false
+  };
+
   render() {
+    const { showMenu } = this.state;
+    const { authedUser, users } = this.props;
+
+    const avatarURL = users[authedUser.id] && users[authedUser.id].avatarURL;
+
     return (
       <nav className="nav">
-        {this.props.authedUser.isAuthenticated === false ? (
+        {authedUser.isAuthenticated === false ? (
           <ul>
             <li>
               <NavLink className="navText" to="/about" activeClassName="active">
@@ -41,20 +50,31 @@ class Nav extends Component {
                 Leaderboard
               </NavLink>
             </li>
-            <li>
-              <NavLink className="navText" to="/about" activeClassName="active">
-                About
-              </NavLink>
-            </li>
-            <li className="navText--logout">
-              <NavLink
-                className="navText"
-                to="/logout"
-                activeClassName="active"
-              >
-                {this.props.authedUser.id}
-              </NavLink>
-            </li>
+            {showMenu ? (
+              <li className="navText--logout">
+                <button className="navText navText--button">Logout</button>
+                <button
+                  className="navText navText--button"
+                  onClick={() => this.setState({ showMenu: !showMenu })}
+                >
+                  Cancel
+                </button>
+              </li>
+            ) : (
+              <li className="navText--logout">
+                {users[authedUser.id] ? (
+                  <div className="Nav__avatar">
+                    <img className="Nav__profile-pic" src={avatarURL} alt="" />
+                  </div>
+                ) : null}
+                <button
+                  className="navText navText--button"
+                  onClick={() => this.setState({ showMenu: !showMenu })}
+                >
+                  {authedUser.id}
+                </button>
+              </li>
+            )}
           </ul>
         )}
       </nav>
@@ -62,9 +82,10 @@ class Nav extends Component {
   }
 }
 
-const mapStateToProps = ({ authedUser }) => {
+const mapStateToProps = ({ authedUser, users }) => {
   return {
-    authedUser: authedUser
+    authedUser,
+    users
   };
 };
 
