@@ -4,6 +4,8 @@ import { handleInitialData } from "./shared";
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
+export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
+export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 
 export const REGISTER_REQUEST = "REGISTER_REQUEST";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
@@ -15,6 +17,24 @@ const loginRequest = creds => {
     isFetching: true,
     isAuthenticated: false,
     creds
+  };
+};
+
+const logoutRequest = userId => {
+  return {
+    type: LOGOUT_REQUEST,
+    isFetching: true,
+    isAuthenticated: true,
+    userId
+  };
+};
+
+const logoutSuccess = userId => {
+  return {
+    type: LOGOUT_SUCCESS,
+    isFetching: false,
+    isAuthenticated: false,
+    userId
   };
 };
 
@@ -82,5 +102,12 @@ export const handleLoginAuthedUser = creds => {
       .then(user => dispatch(loginSuccess(user)))
       .then(() => dispatch(handleInitialData()))
       .catch(e => dispatch(loginError(e)));
+  };
+};
+
+export const handleLogoutAuthedUser = userId => {
+  return dispatch => {
+    dispatch(logoutRequest(userId));
+    dispatch(logoutSuccess(userId));
   };
 };

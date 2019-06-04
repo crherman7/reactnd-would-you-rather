@@ -16,9 +16,13 @@ export const getInitialData = () => {
   );
 };
 
-export const saveQuestion = () => {};
+export const saveQuestion = question => {
+  return _saveQuestion(question);
+};
 
-export const saveQuestionAnswer = () => {};
+export const saveQuestionAnswer = questionAnswer => {
+  return _saveQuestionAnswer(questionAnswer);
+};
 
 export const authenticate = creds => {
   return _authenticate(creds);

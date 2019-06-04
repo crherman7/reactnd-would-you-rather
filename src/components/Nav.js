@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import "../styles/Nav.css";
+import { handleLogoutAuthedUser } from "../actions/authedUser";
 
 class Nav extends Component {
   state = {
@@ -52,7 +53,14 @@ class Nav extends Component {
             </li>
             {showMenu ? (
               <li className="navText--logout">
-                <button className="navText navText--button">Logout</button>
+                <button
+                  onClick={() =>
+                    this.props.dispatch(handleLogoutAuthedUser(authedUser.id))
+                  }
+                  className="navText navText--button"
+                >
+                  Logout
+                </button>
                 <button
                   className="navText navText--button"
                   onClick={() => this.setState({ showMenu: !showMenu })}

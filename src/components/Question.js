@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "../styles/Question.css";
+import { handleAnswerQuestion } from "../actions/questions";
 
 class Question extends Component {
   handleClickChoice = (e, choice) => {
     e.preventDefault();
     console.log(choice);
+    this.props.dispatch(
+      handleAnswerQuestion(this.props.user.id, this.props.question_id, choice)
+    );
   };
 
   totalVotes = () => {
@@ -40,7 +44,7 @@ class Question extends Component {
 
     return (
       <div>
-        {question && (
+        {question ? (
           <div className="Question-container">
             <div className="Question__title-text">would you rather...</div>
             <button
@@ -86,6 +90,8 @@ class Question extends Component {
               </div>
             </div>
           </div>
+        ) : (
+          <div className="Question-container--404">404</div>
         )}
       </div>
     );

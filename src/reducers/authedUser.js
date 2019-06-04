@@ -4,7 +4,9 @@ import {
   LOGIN_FAILURE,
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
-  REGISTER_FAILURE
+  REGISTER_FAILURE,
+  LOGOUT_REQUEST,
+  LOGOUT_SUCCESS
 } from "../actions/authedUser";
 
 const authedUser = (
@@ -24,6 +26,18 @@ const authedUser = (
         isAuthenticated: true,
         id: action.id,
         errorMessage: ""
+      };
+    case LOGOUT_REQUEST:
+      return {
+        isFetching: true,
+        isAuthenticated: true,
+        id: action.userId
+      };
+    case LOGOUT_SUCCESS:
+      return {
+        isFetching: false,
+        isAuthenticated: false,
+        id: action.userId
       };
     case LOGIN_FAILURE:
       return {

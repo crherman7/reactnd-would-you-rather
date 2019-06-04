@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "../styles/NewQuestion.css";
+import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import { handleAddQuestion } from "../actions/questions";
 
 class NewQuestion extends Component {
   state = {
@@ -14,8 +16,13 @@ class NewQuestion extends Component {
 
   handleClick = e => {
     e.preventDefault();
-
-    console.log(this.state.optionOne + this.state.optionTwo);
+    this.props.dispatch(
+      handleAddQuestion(
+        this.state.optionOne,
+        this.state.optionTwo,
+        this.props.userId
+      )
+    );
     this.props.history.push("/");
   };
 
@@ -38,7 +45,10 @@ class NewQuestion extends Component {
           value={optionTwo}
           onChange={e => this.handleChange("optionTwo", e)}
         />
-        <button onClick={this.handleClick} className="NewQuestion__submit-button">
+        <button
+          onClick={this.handleClick}
+          className="NewQuestion__submit-button"
+        >
           Submit
         </button>
       </div>
@@ -46,4 +56,10 @@ class NewQuestion extends Component {
   }
 }
 
-export default withRouter(NewQuestion);
+const mapStateToProps = ({ authedUser }) => {
+  return {
+    userId: authedUser.id
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(NewQuestion));
