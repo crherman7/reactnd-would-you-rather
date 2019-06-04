@@ -19,7 +19,7 @@ class LoginForm extends Component {
   };
 
   render() {
-    const { handleSubmit, handleSignUp } = this.props;
+    const { handleSubmit } = this.props;
     const { username, password } = this.state;
 
     return (
@@ -45,12 +45,6 @@ class LoginForm extends Component {
             className="Login__button Login__button--login"
           >
             Login
-          </button>
-          <button
-            onClick={handleSignUp}
-            className="Login__button Login__button--register"
-          >
-            Sign Up!
           </button>
         </div>
       </div>

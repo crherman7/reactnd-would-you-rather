@@ -4,7 +4,6 @@ import {
   _saveQuestion,
   _saveQuestionAnswer,
   _authenticate,
-  _register
 } from "./_DATA";
 
 export const getInitialData = () => {
@@ -26,8 +25,4 @@ export const saveQuestionAnswer = questionAnswer => {
 
 export const authenticate = creds => {
   return _authenticate(creds);
-};
-
-export const register = info => {
-  return _register(info);
 };

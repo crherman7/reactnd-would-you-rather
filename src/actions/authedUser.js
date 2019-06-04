@@ -1,4 +1,4 @@
-import { authenticate, register } from "../util/api";
+import { authenticate } from "../util/api";
 import { handleInitialData } from "./shared";
 
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
@@ -6,10 +6,6 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
-
-export const REGISTER_REQUEST = "REGISTER_REQUEST";
-export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
-export const REGISTER_FAILURE = "REGISTER_FAILURE";
 
 const loginRequest = creds => {
   return {
@@ -56,43 +52,6 @@ const loginError = message => {
   };
 };
 
-const registerRequest = info => {
-  return {
-    type: REGISTER_REQUEST,
-    isFetching: true,
-    isAuthenticated: false,
-    info
-  };
-};
-
-const registerSuccess = user => {
-  return {
-    type: REGISTER_SUCCESS,
-    isFetching: false,
-    isAuthenticated: true,
-    id: user.id
-  };
-};
-
-const registerFailure = message => {
-  return {
-    type: REGISTER_FAILURE,
-    isFetching: false,
-    isAuthenticated: false,
-    message
-  };
-};
-
-export const handleRegisterUser = info => {
-  return dispatch => {
-    dispatch(registerRequest(info));
-    return register({
-      info
-    })
-      .then(user => dispatch(registerSuccess(user)))
-      .catch(e => dispatch(registerFailure(e)));
-  };
-};
 export const handleLoginAuthedUser = creds => {
   return dispatch => {
     dispatch(loginRequest(creds));
