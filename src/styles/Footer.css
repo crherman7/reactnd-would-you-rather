@@ -1,0 +1,21 @@
+.Footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 5px;
+  background: white;
+  align-items: center;
+}
+
+.Footer__button {
+  background-repeat: no-repeat;
+  border: none;
+  outline: none;
+  height: 15px;
+  width: 30px;
+}
