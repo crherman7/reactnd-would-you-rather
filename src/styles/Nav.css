@@ -1,0 +1,89 @@
+nav {
+  height: 40px;
+  position: fixed;
+  background-color: white;
+  width: 100%;
+  box-shadow: 0px 1px 5px #e8e8e8;
+}
+
+.nav ul {
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: white;
+  height: 100%;
+}
+
+ul {
+  padding-left: 0;
+}
+
+li {
+  list-style-type: none;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.navText {
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+  font-size: 13px;
+}
+
+.navText:hover {
+  color: grey;
+}
+
+.navText--logout {
+  position: fixed;
+  right: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.navText--button {
+  border: none;
+  outline: none;
+  font-weight: 500;
+}
+
+.Nav__menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: absolute;
+  right: 30px;
+  top: 39px;
+  width: 100px;
+  box-shadow: 0px 10px 10px #e8e8e8;
+}
+
+.Nav__menu--button {
+  width: 100px;
+  border: none;
+  outline: none;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.Nav__avatar {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid lightgrey;
+  box-shadow: 0px 0px 5px lightgrey;
+  margin-right: 5px;
+}
+
+.Nav__profile-pic {
+  display: inline;
+  margin: 0 auto;
+  height: 100%;
+  width: auto;
+}

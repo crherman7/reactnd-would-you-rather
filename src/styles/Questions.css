@@ -1,0 +1,15 @@
+.Questions-container {
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+.Questions--title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
